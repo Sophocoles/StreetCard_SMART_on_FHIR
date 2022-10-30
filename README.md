@@ -1,3 +1,116 @@
+# =====================================================================================================
+# STREETCARD BEGIN
+Follow the README instructions for the react-fhir-sample-app(see below STREETCARD README) and reference the troubleshooting list for issues
+
+Troubleshooting
+    For step 1: Just copy paste the .env file and change the name to .env.local
+
+    For step 2: Yarn needed an update prior to launch. This will take some time to install.
+
+        In project repo(I used Command Prompt Admin)
+
+            yarn upgrade
+
+            yarn add yarn
+
+    For step 3: yarn start (This should open the webapp in your desktop)
+
+
+### TODO
+    Register app with Cerner and Epic
+
+    Implement account creation
+        Use GitHub to source Account Creation code that uses Django
+            link:
+        3 or 4 types of accounts to create
+            Client
+            Provider
+            Facilitator
+            Intake Worker**
+            Only needs basic patient view for check-in
+
+    Scour old Django code for database
+        This would only hold our Client data
+
+    Create Provider data table
+
+    Create Facilitator data table
+
+    Create endpoint table
+        Reference Lantern project resources
+            Lantern project link: https://lantern.healthit.gov/
+            Backend GH: https://github.com/onc-healthit/lantern-back-end
+                Do we need to add this to our code? 
+
+    Connect via relational (Or whatever Django supports) DB
+
+    Create code that can populate \src\config.json with custom JSON code using a search on our HIMS/Client database
+        link:
+
+    Create landing page using React
+        I am a...
+
+            StreetCard Client
+                Log-in
+                    Display basic patient profile
+                    Link to tier 1?***
+                Create account
+                    Required
+                        StreetCardID#
+                            Verified using DB that tracks SCID#'s
+                        
+            Provider
+                Log-in
+                    Add StreetCardID#
+                    View patients and StreetCardID#'s
+                    Select a patient
+                        View patient's locations
+                Create account
+                    Required
+                        StreetCardID# 
+                            Tied to at least one patient
+
+            StreetCard Facilitator
+                In charge of SC Client creation
+                Log-in
+                    Add new Client
+                        Search endpoint database to see if it is accessible
+                    Add changes to client
+                        Add endpoint
+                Create account
+
+            Intake Worker**
+                Log-in
+                Create account
+
+        Text entry box to input StreetCardID#
+            Immediatly display patient profile
+
+    Replace old LOINC code w/ new one that grabs all patient data 
+        code inside \src\components\Chart.js
+        link:
+
+    Display the head of available data from LOINC code
+        Checkboxes to select the data to get a detailed view of
+
+    Display selected patient data
+
+    Download displayed data in CSV, XLS, PDF...
+
+
+### QUESTIONS
+    **Okay to show patient profile upon plugging in StreetCardID#? (To skip account creation for intake workers)
+
+    ***What do we want to do about the old code?
+        Do we know anything about the new code that is being worked on?
+
+
+Readme for react fhir sample app below
+# STREETCARD END
+# =====================================================================================================
+
+
+
 # Introduction
 This Github Project takes the awesome ["Advanced React Example"](https://codesandbox.io/s/fhir-client-react-react-router-context-0q3n8)
  found at the [client-js](https://github.com/smart-on-fhir/client-js) project and extends it in the following ways.
