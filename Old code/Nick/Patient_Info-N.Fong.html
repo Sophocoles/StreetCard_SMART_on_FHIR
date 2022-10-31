@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <title>UPDATE TEST SMART App</title>
+    
+        <link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
+        <!--
+          Temporarily disable cerner-smart-embeddable-lib
+        <link rel='stylesheet' type='text/css' href='./lib/css/cerner-smart-embeddable-lib-1.0.0.min.css'>
+        -->
+      </head>
+      <body>
+      <!--
+        DISPLAY INFORMATION FROM RECORD
+      -->
+        <div id='errors'>
+        </div>
+        <div id="loading" class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+        <div id='holder' >
+          <h2>SMART-App</h2>
+    
+          <h2>Patient Information</h2>
+          <table>
+            <tr>
+              <th>First Name:</th>
+              <td id='fname'></td>
+            </tr>
+            <tr>
+              <th>Last Name:</th>
+              <td id='lname'></td>
+            </tr>
+            <tr>
+              <th>Gender:</th>
+              <td id='gender'></td>
+            </tr>
+            <tr>
+              <th>Date of Birth:</th>
+              <td id='birthdate'></td>
+            </tr>
+            <tr>
+              <th>Height:</th>
+              <td id='height'></td>
+            </tr>
+            <tr>
+              <th>Weight:</th>
+              <td id='weight'></td>
+            </tr>
+          </table>
+          <h2>Allergies</h2>
+          <table>
+            <tr>
+              <th>Allergy:</th>
+              <td id='allergy'></td>
+            </tr>
+            <tr>
+              <th>Allergic Reaction:</th>
+              <td id='allreact'></td>
+            </tr>
+          </table>
+          <h2>Medications</h2>
+          <table>
+            <tr>
+              <th>Medication:</th>
+              <td id='medname'></td>
+            </tr>
+            <tr>
+              <th>Dose:</th>
+              <td id='meddose'></td>
+            </tr>
+            <tr>
+              <th>Frequency:</th>
+              <td id='medfreq'></td>
+            </tr>
+          </table>
+          <h2>Health Maintenance Screening Test History</h2>
+          <table>
+            <tr>
+              <th>Cholesterol:</th>
+              <td id='chol'></td>
+            </tr>
+            <tr>
+              <th>Colonoscopy/Sigmoid:</th>
+              <td id='ColoSig'></td>
+            </tr>
+            <tr>
+              <th>Mammogram:</th>
+              <td id='mammo'></td>
+            </tr>
+            <tr>
+              <th>Pap Smear:</th>
+              <td id='papsme'></td>
+            </tr>
+            <tr>
+              <th>Bone Density:</th>
+              <td id='bonedens'></td>
+            </tr>
+          </table>
+          <h2>Vaccination History</h2>
+          <table>
+            <tr>
+              <th>Vaccination:</th>
+              <td id='vacc'></td>
+            </tr>
+            <tr>
+              <th>Taken:</th>
+              <td id='vaccdate'></td>
+            </tr>
+          </table>
+          <h2>Personal Medical History</h2>
+          <table>
+            <tr>
+              <th>Description of Medical History:</th>
+              <td id='DesMDH'></td>
+            </tr>
+          </table>
+          <h2>Surgeries</h2>
+          <table>
+            <tr>
+              <th>Surgery History:</th>
+              <td id='DesSurg'></td>
+            </tr>
+          </table>
+          <h2>Women's Health History</h2>
+          <table>
+            <tr>
+              <th>Date of Last Menstrual Cycle:</th>
+              <td id='DateLMC'></td>
+            </tr>
+            <tr>
+              <th>Total Number of Pregnancies:</th>
+              <td id='TotNumoPreg'></td>
+            </tr>
+            <tr>
+              <th>Number of Live Births:</th>
+              <td id='NumoLB'></td>
+            </tr>
+            <tr>
+              <th>Pregnancy Complication:</th>
+              <td id='PregComp'></td>
+            </tr>
+          </table>
+          <h2>Family Medical History</h2>
+          <table>
+            <tr>
+              <th>Medical History:</th>
+              <td id='FamMH'></td>
+              <th>Relation:</th>
+              <td id='FamMHRel'></td>
+            </tr>
+          </table>
+          <h2>Social History</h2>
+          <table>
+            <tr>
+              <th>Description:</th>
+              <td id='SocHis'></td>
+            </tr>
+          </table>
+          <h2>Other Health Issues</h2>
+          <table>
+            <tr>
+              <th>Tobacco Use:</th>
+              <td id='TobUs'></td>
+            </tr>
+            <tr>
+              <th>Alcohol Use:</th>
+              <td id='AlcUs'></td>
+            </tr>
+            <tr>
+              <th>Sexual Activity:</th>
+              <td id='SexAc'></td>
+            </tr>
+            <tr>
+              <th>Exercise:</th>
+              <td id='Exer'></td>
+            </tr>
+            <tr>
+              <th>Sleep:</th>
+              <td id='Sleep'></td>
+            </tr>
+            <tr>
+              <th>Diet:</th>
+              <td id='Diet'></td>
+            </tr>
+            <tr>
+              <th>Safety:</th>
+              <td id='Safet'></td>
+            </tr>
+          </table>
+          <h2>Other Providers/Specialists</h2>
+          <table>
+            <tr>
+              <th>Provider:</th>
+              <td id='ProvName'></td>
+              <th>Phone Number:</th>
+              <td id='ProvPhonenum'></td>
+            </tr>
+          </table>
+          <h2>Additional Information</h2>
+          <table>
+            <tr>
+              <th>Description:</th>
+              <td id='AddInfoDesc'></td>
+            </tr>
+          </table>
+          <h2>Review of Systems</h2>
+          <table>
+            <tr>
+              <th>Description:</th>
+              <td id='RevoSysDesc'></td>
+            </tr>
+          </table>
+
+          <!--Insert Review of Systems Later, Unincluded due to amount of information-->
+
+            <!-- PREVIOUS CODE - FOR REFERENCE LATER
+              <tr>
+                <th>Systolic Blood Pressure:</th>
+                <td id='systolicbp'></td>
+              </tr>
+              <tr>
+                <th>Diastolic Blood Pressure:</th>
+                <td id='diastolicbp'></td>
+              </tr>
+              <tr>
+                <th>LDL:</th>
+                <td id='ldl'></td>
+              </tr>
+              <tr>
+                <th>HDL:</th>
+                <td id='hdl'></td>
+              </tr>
+            -->
+        </div>
+        <!-- Required JS files to enable this page to embed within an MPage -->
+        <!--
+          Temporarily disable cerner-smart-embeddable-lib
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
+          <script src='./lib/js/cerner-smart-embeddable-lib-1.0.0.min.js'></script>
+        -->
+    
+        <!-- Application-level javascript-->
+        <script src='./src/js/example-smart-app.js'></script>
+    
+        <!-- FHIR Client JS Library -->
+        <script src='./lib/js/fhir-client-v0.1.12.js'></script>
+    
+        <!-- Prevent session bleed caused by single threaded embedded browser and sessionStorage API -->
+        <!-- https://github.com/cerner/fhir-client-cerner-additions -->
+        <script src='./lib/js/fhir-client-cerner-additions-1.0.0.js'></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+          extractData().then(
+            //Display Patient Demographics and Observations if extractData was success
+            function(p) {
+              drawVisualization(p);
+            },
+    
+            //Display 'Failed to call FHIR Service' if extractData failed
+            function() {
+              $('#loading').hide();
+              $('#errors').html('<p> Failed to call FHIR Service </p>');
+            }
+          );
+        </script>
+
+        <!--
+        END DISPLAY INFORMATION FROM RECORD.
+
+        CODE USED TO CREATE AN ADJACENT FORM PLACED BELOW.
+        -->
+
+
+
+      </body>
+</html>

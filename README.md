@@ -17,11 +17,17 @@ Troubleshooting
 
 
 ### TODO
+
+# Marcy
     Register app with Cerner and Epic
+
+    Ensure we can launch in either Cerner or Epic using manual Patient Selection
+        Current problem: Unable to view Cerner
 
     Implement account creation
         Use GitHub to source Account Creation code that uses Django
-            link:
+            tutorial link: https://www.youtube.com/watch?v=QnviZrFr6co
+            GH: https://github.com/nusrat-borsha/Django-custom-registration
         3 or 4 types of accounts to create
             Client
             Provider
@@ -29,7 +35,9 @@ Troubleshooting
             Intake Worker**
             Only needs basic patient view for check-in
 
-    Scour old Django code for database
+
+# Indira
+    Scour old (tier 1) Django code for database
         This would only hold our Client data
 
     Create Provider data table
@@ -44,8 +52,10 @@ Troubleshooting
 
     Connect via relational (Or whatever Django supports) DB
 
+# Chris
     Create code that can populate \src\config.json with custom JSON code using a search on our HIMS/Client database
-        link:
+        How to Query a Database and Write the Data to JSON
+        link: https://www.goanywhere.com/managed-file-transfer/more/tutorials/how-to-query-a-database-and-write-the-data-to-json
 
     Create landing page using React
         I am a...
@@ -86,9 +96,10 @@ Troubleshooting
         Text entry box to input StreetCardID#
             Immediatly display patient profile
 
+# Nick
     Replace old LOINC code w/ new one that grabs all patient data 
         code inside \src\components\Chart.js
-        link:
+        link: https://loinc.org/55188-7/
 
     Display the head of available data from LOINC code
         Checkboxes to select the data to get a detailed view of
