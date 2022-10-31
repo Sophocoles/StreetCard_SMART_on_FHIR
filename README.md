@@ -1,4 +1,4 @@
-# =====================================================================================================
+# =====================================
 # STREETCARD BEGIN
 Follow the README instructions for the react-fhir-sample-app(see below STREETCARD README) and reference the troubleshooting list for issues
 
@@ -118,7 +118,7 @@ Troubleshooting
 
 Readme for react fhir sample app below
 # STREETCARD END
-# =====================================================================================================
+# =====================================
 
 
 
