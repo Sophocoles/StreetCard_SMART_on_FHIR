@@ -48,7 +48,7 @@ Troubleshooting
         Reference Lantern project resources
             Lantern project link: https://lantern.healthit.gov/
             Backend GH: https://github.com/onc-healthit/lantern-back-end
-                Do we need to add this to our code? 
+                Do we need to add this to our code?**** 
 
     Connect via relational (Or whatever Django supports) DB
 
@@ -114,6 +114,8 @@ Troubleshooting
 
     ***What do we want to do about the old code?
         Do we know anything about the new code that is being worked on?
+
+    ****Do we need to use the repo for Lantern?
 
 
 Readme for react fhir sample app below
