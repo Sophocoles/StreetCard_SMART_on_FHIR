@@ -54,7 +54,7 @@
     },
     "cerner" : {
         "client_id": "taken from .env.local",
-        "scope": "openid profile patient/Patient.read patient/AllergyIntolerance.read patient/Condition.read",
+        "scope": "patient/Patient.read patient/Observation.read launch/patient online_access openid profile",
         "redirectUri": "http://localhost:9000/redirect",
         "url": "https://fhir-myrecord.cerner.com/dstu2/ec2458f2-1e24-41c8-b71b-0e701af7583d",
         "comments": {
@@ -68,6 +68,25 @@
         "url": "https://open-ic.epic.com/argonaut/api/FHIR/Argonaut/",
         "comments": {
             "note1": "EPIC APP Required see README.md"
+        }
+    }
+    ,
+    "Newline" : {
+        "client_id": "taken from .env.local",
+        "scope": "openid profile patient/Patient.read",
+        "redirectUri": "http://localhost:9000/redirect",
+        "url": "https://open-ic.epic.com/argonaut/api/FHIR/Argonaut/",
+        "comments": {
+            "note1": "Testing adding new line"
+        }
+    },
+    "Oldcerner" : {
+        "client_id": "taken from .env.local",
+        "scope": "openid profile patient/Patient.read patient/AllergyIntolerance.read patient/Condition.read",
+        "redirectUri": "http://localhost:9000/redirect",
+        "url": "https://fhir-myrecord.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d/",
+        "comments": {
+            "note1": "Cerner APP Required see README.md"
         }
     }
 }

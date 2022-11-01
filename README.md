@@ -2,7 +2,8 @@
 # STREETCARD BEGIN
 Follow the README instructions for the react-fhir-sample-app(see below STREETCARD README) and reference the troubleshooting list for issues
 
-Troubleshooting
+Troubleshooting:
+
     For step 1: Just copy paste the .env file and change the name to .env.local
 
     For step 2: Yarn needed an update prior to launch. This will take some time to install.
@@ -17,17 +18,14 @@ Troubleshooting
 
 
 ### TODO
-
-# Marcy
     Register app with Cerner and Epic
-
-    Ensure we can launch in either Cerner or Epic using manual Patient Selection
-        Current problem: Unable to view Cerner
-
+        Cerner
+            Configure json handshake in config.json
+                link: http://fhir.cerner.com/authorization/
+    
     Implement account creation
         Use GitHub to source Account Creation code that uses Django
-            tutorial link: https://www.youtube.com/watch?v=QnviZrFr6co
-            GH: https://github.com/nusrat-borsha/Django-custom-registration
+            link:
         3 or 4 types of accounts to create
             Client
             Provider
@@ -35,9 +33,7 @@ Troubleshooting
             Intake Worker**
             Only needs basic patient view for check-in
 
-
-# Indira
-    Scour old (tier 1) Django code for database
+    Scour old Django code for database
         This would only hold our Client data
 
     Create Provider data table
@@ -48,14 +44,12 @@ Troubleshooting
         Reference Lantern project resources
             Lantern project link: https://lantern.healthit.gov/
             Backend GH: https://github.com/onc-healthit/lantern-back-end
-                Do we need to add this to our code?**** 
+                Do we need to add this to our code? 
 
     Connect via relational (Or whatever Django supports) DB
 
-# Chris
     Create code that can populate \src\config.json with custom JSON code using a search on our HIMS/Client database
-        How to Query a Database and Write the Data to JSON
-        link: https://www.goanywhere.com/managed-file-transfer/more/tutorials/how-to-query-a-database-and-write-the-data-to-json
+        link:
 
     Create landing page using React
         I am a...
@@ -96,10 +90,9 @@ Troubleshooting
         Text entry box to input StreetCardID#
             Immediatly display patient profile
 
-# Nick
     Replace old LOINC code w/ new one that grabs all patient data 
         code inside \src\components\Chart.js
-        link: https://loinc.org/55188-7/
+        link:
 
     Display the head of available data from LOINC code
         Checkboxes to select the data to get a detailed view of
@@ -114,8 +107,6 @@ Troubleshooting
 
     ***What do we want to do about the old code?
         Do we know anything about the new code that is being worked on?
-
-    ****Do we need to use the repo for Lantern?
 
 
 Readme for react fhir sample app below
