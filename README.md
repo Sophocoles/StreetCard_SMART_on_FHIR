@@ -1,258 +1,272 @@
-# =====================================
-# STREETCARD BEGIN
-Follow the README instructions for the react-fhir-sample-app(see below STREETCARD README) and reference the troubleshooting list for issues
+# SER517 StreetCard
+### **Project Info:**
 
-Troubleshooting:
+The StreetCard is a carefully reasoned, comprehensive social program that seeks to connect Homeless
+Persons with Information Technology to optimize the process of providing benefits and housing. 
 
-    For step 1: Just copy paste the .env file and change the name to .env.local
+### **Motivation:**
 
-    For step 2: Yarn needed an update prior to launch. This will take some time to install.
+This is a humanitarian project: the intent being to remedy the needless suffering of our poorest citizens.
+Homeless persons are a vulnerable and essentially un-represented population. The services that are
+available are often underfunded and inadequate.
+By making use of information technology to streamline the provision of benefits, we hope to eliminate
+the cracks in the system, through which taxpayer dollars are profligately wasted. Money saved might be
+then reinvested in improving services, building shelters and low-cost housing, and improving pay and
+benefits for Service Providers.
 
-        In project repo(I used Command Prompt Admin)
-
-            yarn upgrade
-
-            yarn add yarn
-
-    For step 3: yarn start (This should open the webapp in your desktop)
+### **Technology Stack:**
+- Backend: Django REST Framework, RabbitMQ message broker, Celery Distributed Task Queue, Memcached
+- Frontend: React
+- Database: Postgres (Hosted on Amazon RDS)
 
 
-### TODO
-    Register app with Cerner and Epic
-        Cerner
-            Configure json handshake in config.json
-                link: http://fhir.cerner.com/authorization/
+### Installation Guide:
+
+#### 3.1 Quick Installation Guide Using Docker(on your local system):
+
+- Clone the git repository. 
+
+   > ```git clone https://github.com/ansamant/SER517-P6-Street-Card.git```
+
+- Install docker on your local system. (https://docs.docker.com/get-docker/)
+
+- Install docker-compose. (https://docs.docker.com/compose/install/)
+
+- Run  ```sudo service docker start```
+
+- Create .env files.
+
+Note: We need environment variables set up to run the web application. 
+We need to have a .env file in /frontend and /backend folders which has a set of environment variables.
+
+- Go to /frontend/ (with in the project root folder)
+
+- Create a .env file with keys as shown below.
+
+    > `REACT_APP_KEY=your-google-map-api-key`
+    >
+    > `REACT_APP_IP=http://localhost:8000/`
+
+- Go to /backend/ (with in the project root folder)
+
+- Create a .env file with keys as shown below.
+    > `SECRET_KEY=your-secret-key`
+    >
+    > `DB_USER=your-db-user`
+    >
+    > `DB_PASSWORD=your-db-password`
+    >
+    > `DB_HOST=your-db-host`
+    >
+    > `DB_PORT=your-db-port`
+    >
+    > `DB_NAME=you-db-name`
+    >
+    > `DJANGO_EMAIL_USR=your-user-email`
+    >
+    > `DJANGO_EMAIL_PWD=your-email-password`
     
-    Implement account creation
-        Use GitHub to source Account Creation code that uses Django
-            link:
-        3 or 4 types of accounts to create
-            Client
-            Provider
-            Facilitator
-            Intake Worker**
-            Only needs basic patient view for check-in
+- Switch the celery broker URL in /backend/api/settings.py to localhost as directed.
 
-    Scour old Django code for database
-        This would only hold our Client data
+    > For Development Environment: 'amqp://localhost'
+    >
+    > For Production Environment: 'amqp://guest:guest@rabbit:5672'
+    >
+    > `CELERY_BROKER_URL = 'amqp://localhost'`
 
-    Create Provider data table
+- Edit /backend/Dockerfile and add the following command before line 6.
+  
+  > ```python3 manage.py makemigrations && python3 manage.py migrate```
 
-    Create Facilitator data table
+- Run the following docker command . (This is where the magic happens)
 
-    Create endpoint table
-        Reference Lantern project resources
-            Lantern project link: https://lantern.healthit.gov/
-            Backend GH: https://github.com/onc-healthit/lantern-back-end
-                Do we need to add this to our code? 
+    > `docker-compose up -d`
 
-    Connect via relational (Or whatever Django supports) DB
+- Go to http://localhost:3000/ 
 
-    Create code that can populate \src\config.json with custom JSON code using a search on our HIMS/Client database
-        link:
+#### 3.2 Quick Installation Guide Using Docker(on AWS EC2 instance):
 
-    Create landing page using React
-        I am a...
+- Follow the steps to create an EC2 instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html)
 
-            StreetCard Client
-                Log-in
-                    Display basic patient profile
-                    Link to tier 1?***
-                Create account
-                    Required
-                        StreetCardID#
-                            Verified using DB that tracks SCID#'s
-                        
-            Provider
-                Log-in
-                    Add StreetCardID#
-                    View patients and StreetCardID#'s
-                    Select a patient
-                        View patient's locations
-                Create account
-                    Required
-                        StreetCardID# 
-                            Tied to at least one patient
+- After creating the instance, save the key-pair (.pem file)
 
-            StreetCard Facilitator
-                In charge of SC Client creation
-                Log-in
-                    Add new Client
-                        Search endpoint database to see if it is accessible
-                    Add changes to client
-                        Add endpoint
-                Create account
+- Run the command: `sudo chmod 400 your-key-pair.pem` 
 
-            Intake Worker**
-                Log-in
-                Create account
+Note: This command assigns appropriate permission to the key-pair.
 
-        Text entry box to input StreetCardID#
-            Immediatly display patient profile
+- To SSH into the AWS EC2 instance: 
 
-    Replace old LOINC code w/ new one that grabs all patient data 
-        code inside \src\components\Chart.js
-        link:
+    > `scp -i your-key-pair.pem ec2-user@your-public-DNS`
 
-    Display the head of available data from LOINC code
-        Checkboxes to select the data to get a detailed view of
+- Install git using command: `sudo yum install git`
 
-    Display selected patient data
+- Install docker using command: `sudo yum install docker`
 
-    Download displayed data in CSV, XLS, PDF...
+Install docker-compose. (https://docs.docker.com/compose/install/)
 
+- Run sudo service docker start
 
-### QUESTIONS
-    **Okay to show patient profile upon plugging in StreetCardID#? (To skip account creation for intake workers)
+- Create .env files.
 
-    ***What do we want to do about the old code?
-        Do we know anything about the new code that is being worked on?
+Note: We need environment variables set up to run the web application. 
+We need to have a .env file in /frontend and /backend folders which has a set of environment variables.
 
+- Go to /frontend/ (with in the project root folder)
 
-Readme for react fhir sample app below
-# STREETCARD END
-# =====================================
+- Create a .env file with keys as shown below.
 
+    > `REACT_APP_KEY=your-google-map-api-key`
+    >
+    > `REACT_APP_IP=http://aws-ip-instance:3000/`
 
+- Go to /backend/ (with in the project root folder)
 
-# Introduction
-This Github Project takes the awesome ["Advanced React Example"](https://codesandbox.io/s/fhir-client-react-react-router-context-0q3n8)
- found at the [client-js](https://github.com/smart-on-fhir/client-js) project and extends it in the following ways.
+- Create a .env file with keys as shown below.
 
-1.  Move the code from the codepensandbox into a stand alone app created via create-react-app and managed with yarn
-2.  Extends it to work with multiple servers both open and authenticated.
-    1.  Additional servers or patients can be added by extending the config.json file
-3.  Upgrades the client-js library to the latest
+    >  `SECRET_KEY=your-secret-key`
+    >
+    > `DB_USER=your-db-user`
+    >
+    > `DB_PASSWORD=your-db-password`
+    >
+    > `DB_HOST=your-db-host`
+    >
+    > `DB_PORT=your-db-port`
+    >
+    > `DB_NAME=you-db-name`
+    >
+    > `DJANGO_EMAIL_USR=your-user-email`
+    >
+    > `DJANGO_EMAIL_PWD=your-email-password`
 
-# Test using the Public Servers
+- Switch the celery broker URL in /backend/api/settings.py as directed.
 
-### Step 1
+    > For Development Environment: 'amqp://localhost'
+    >
+    > For Production Environment: 'amqp://guest:guest@rabbit:5672'
+    >
+    > `CELERY_BROKER_URL = 'amqp://guest:guest@rabbit:5672'`
 
-    cp .env .env.local
-
-### Step 2
-Start this example app
-
-```shell script
-yarn start
-```
-
-### Step 3
-Open your browser to this example app at `http://localhost:9000` and choose 'smarthealthit' from the pulldown
-
-### Step 4
-Open your browser to this example app at `http://localhost:9000` and choose 'publicHapiServer' from the pulldown
-
-# Run Open Servers Locally
-
-## localHapiServer
-
-### Step 1
-
-Run the HAPI server locally (see also https://hub.docker.com/r/smartonfhir/hapi and https://github.com/smart-on-fhir/hapi)
-```shell script
-docker run -p 8000:8080 smartonfhir/hapi:r2-smart
-# .. go get coffee
-```
-
-### Step 2
-Open your browser to this example app at `http://localhost:9000` and choose 'localHapiServer' from the pulldown
-
-## smartdev
-
-### Step 1
-
-Run the smartdev stack locally (see also https://github.com/smart-on-fhir/smart-dev-sandbox)
-```shell script
-git clone https://github.com/smart-on-fhir/smart-dev-sandbox.git
-cd smart-dev-sandbox 
-docker-compose up
-# .. go to lunch
-```
-
-### Step 2
-Open your browser to this example app at `http://localhost:9000` and choose 'smartdev' from the pulldown
-
-# Using Cerner and Epic sandboxes
-
-See `src/config.json` for the JSON configuration per site that is read by this application to populate the selector 
-you see when you first browse to this example app.  The Cerner and Epic examples need a little extra configuration 
-before they will work correctly.
-
-## Cerner
-
-### Step 1
-Create your Cerner Sandbox account at the [Cerner Developer Console][7]
-
-### Step 2
-Create an App and Set the redirect URI to `http://localhost:9000/redirect`
-
-### Step 3
-Set your APP ID in .env.local you created above
-
-```
-REACT_APP_CLIENT_ID_cerner=<Your APP ID>
-```
-
-### Step 4
-Open your browser to this example app at `http://localhost:9000` and choose cerner from the pulldown
-
-### Step 5
-Login in to the Cerner Sandbox with a sample patient
-
-    Sample User: timmysmart
-    Password: Cerner01
-
->**NOTE:** The cerner sample account does not have chart-able observation data
->so you will only see the patient banner after you are redirected back to the app
-
-## Epic
-
-### Step 1
-Create your Epic Sandbox account at the [Epic Developer Console][8]
-
-### Step 2
-Create an App and Set the redirect URI to `http://localhost:9000/redirect`
-
->**IMPORTANT:** When creating a new app or any time you change the redirect URI with Epic, 
->you must wait until the next day for the changes to take effect (on occasion even longer..)
-
-### Step 3
-Set your APP ID in .env.local you created above
-
-```
-REACT_APP_CLIENT_ID_epic=<Your APP ID>
-```
-
-### Step 4
-Open your browser to this example app at `http://localhost:9000` and choose 'epic' from the pulldown
-
-### Step 5
-Login in to the Epic Sandbox with a sample patient
-
-    Sample User: fhirjson
-    Password: epicepic1
-
->**NOTE:** The cerner sample account does not have chart-able observation data
->so you will only see the patient banner after you are redirected back to the app
-
-
-# References
-
-* [client-js GitHub Project][1]
-* [client-js documentation][2]
-* [client-js Advanced React Example][3]
-* [DockerHub Hapi Images][4]
-* [GitHub Repo for HAPI images][5]
-* [GitHub repo for Smartdev Sandbox][6]
-* [Cerner Developer Console][7]
-* [Epic Developer Console][8]
-
-[1]: https://github.com/smart-on-fhir/client-js
-[2]: http://docs.smarthealthit.org/client-js/
-[3]: https://codesandbox.io/s/fhir-client-react-react-router-context-0q3n8
-[4]: https://hub.docker.com/r/smartonfhir/hapi
-[5]: https://github.com/smart-on-fhir/hapi
-[6]: https://github.com/smart-on-fhir/smart-dev-sandbox
-[7]: https://code.cerner.com/developer/smart-on-fhir/apps
-[8]: https://fhir.epic.com/Developer/Apps
+- Edit /backend/Dockerfile and add the following command before line 6.
+
+    > `python3 manage.py makemigrations && python3 manage.py migrate`
+
+- Run the docker command. (This is where the magic happens)
+
+    > `docker-compose up -d`
+
+- Go to your `aws-instance-ip:3000` in a web browser.
+
+
+### Useful commands to run independent services:
+**Database setup:**
+<br> Setup your own database by modifying this piece of code within the settings.py file.
+~~~
+DATABASES = { 
+    'default': {
+        'ENGINE': 'your database engine',
+        'USER': 'your db username',
+        'PASSWORD': 'your db password',
+        'HOST': 'your db host',
+        'PORT': 'your db port',
+        'NAME': 'your db name',
+    }
+}
+~~~
+
+<br> Migrations files within the app folder would help you setup the database.
+<br> To set up the tables in your database:
+
+- `python manage.py makemigrations`
+- `python manage.py migrate`
+
+**To install pre-requisite backend libraries:**
+- `pip install -r requirements.txt`
+
+**To install pre-requisite frontend libraries:**
+- `npm install`
+
+**To start the backend server:**
+- `python manage.py runserver`
+
+**To start the front end app:**
+- `npm start`
+
+**RabbitMQ:**
+
+- **Unix**:(Homebrew see:https://brew.sh/) 
+    - brew update
+    - brew install rabbitmq
+    - **Other Commands**
+     - brew services start rabbitmq --> starts rabbitmq server
+     - brew services stop rabbitmq --> stops rabbitmq server
+     - brew services restart rabbitmq --> restarts rabbitmq server
+     - brew services list --> lists all services present on computer along with their status information.
+     - For more info: https://www.rabbitmq.com/install-homebrew.html
+- **Windows**:(installer)
+    see:https://www.rabbitmq.com/install-windows.html
+- **Others**
+    see:https://www.rabbitmq.com/download.html
+
+**Celery**
+
+- Go to top level folder of the project
+- to run celery use command: 
+    - celery -A api -l worker info
+- info is optional but recommended as it demonstrates what is working 
+**References:**
+    - For daemonizing celery after deployment: https://docs.celeryproject.org/en/stable/userguide/daemonizing.html
+    - For celery integration in django: https://docs.celeryproject.org/en/stable/django/index.html
+    
+### Important Tips for Email Configuration Information:
+
+ This project currently utilizes google SMTP server configurations. 
+ The EMAIL_HOST_USER and EMAIL_HOST_PASSWORD configurations are set in host environment for security reason. 
+ If you choose to link with the project through a different account make sure that your email account is 
+ configured to accept emails from less secure sources (see: https://support.google.com/accounts/answer/6010255?hl=en).
+ If your account uses Two-Step Verification, it is better to use a specially generated password for the app 
+ (see: https://support.google.com/mail/answer/185833)
+ 
+### Caching
+
+ To avoid redundant get call to the database, we have implemented caching.
+ We are using Django's cache framework (https://docs.djangoproject.com/en/3.0/topics/cache/)
+ The cache system we are using is **Memcached**.
+ 
+ **Installing Memcached :**
+ 
+ - Step 1: Install memcached
+ 
+     ````
+    $ brew install memcached
+     ````
+ - Step 2: Start the memcached service
+    ```
+   $ brew services start memcached
+    ```
+ - Step 3: Verify Installation
+    ```
+   $ memcached -V
+    ```
+  
+ **Installing Memcached Binding :**
+ - Use the following command to install python memcached client (python-memcached):
+ 
+     ```
+    $ pip install python-memcached
+    ```
+   
+ To use Memcached with Django:
+
+- Set **BACKEND** to **django.core.cache.backends.memcached.MemcachedCache**
+- Set **LOCATION** to **ip:port** values, where **ip** is the IP address of the Memcached daemon and **port** is the port on which Memcached is running.
+
+Add the below code snippet to **/api/settings.py**
+````
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+````
