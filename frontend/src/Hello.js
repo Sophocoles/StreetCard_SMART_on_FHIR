@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "./Header"
+import Launcher from "./FHIR-Views/src/components/Launcher"
 import LocationMap from "./LocationMap"
 import StreetCardFooter from './StreetCardFooter'
-import {Layout} from 'antd'
+import {Button, Layout} from "antd";
 
 export default class LandingPage extends React.Component {
 
@@ -12,6 +13,8 @@ export default class LandingPage extends React.Component {
             loggedInStatus: 'NOT_LOGGED_IN'
         };
         this.handleSuccessfulLoginAction = this.handleSuccessfulLoginAction.bind(this);
+
+        
 
     }
 
@@ -24,10 +27,15 @@ export default class LandingPage extends React.Component {
         this.props.handleLogout();
     }
 
+    
+
     render() {
         return (
             <Layout>
-                <p>Test</p>
+                
+                    <Button onClick={Launcher}  type="primary" key="2">
+                       Go to new code
+                    </Button>
                 <Header
                     handleSuccessfulLoginAction={this.handleSuccessfulLoginAction}
                     loggedInStatus={this.state.loggedInStatus}

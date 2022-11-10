@@ -26,6 +26,7 @@ import TransactionComplete from "./TransactionComplete";
 import AddProductSuccess from "./AddProductSuccess";
 import UpdateSocialWorkerInfoForm from "./UpdateSocialWorkerInfo";
 import SuccessfulSocialRegistration from "./SuccessfulSocialRegistration"
+import Hello from "./Hello"
 
 const PrivateRoute = ({component: Component, loggedInStatus: loggedInStatus, ...rest}) => (
     <Route render={(props) => (
@@ -184,9 +185,9 @@ export default class App extends React.Component {
                     <Switch>
                         <Route
                             exact
-                            path={"/"}
+                            path={"/"} //This is where we switch the initial view. Replace Hello wLanding page
                             render={props => (
-                                <LandingPage
+                                <Hello
                                     {...props}
                                     loggedInStatus={this.state.loggedInStatus}
                                 />
@@ -264,7 +265,6 @@ export default class App extends React.Component {
                             clearanceLevel={this.state.clearanceLevel}
                             username={this.state.username}
                             loggedInStatus={this.state.loggedInStatus}
-                            clearanceLevel={this.state.clearanceLevel}
                             serviceProvider={this.state.serviceProvider}
                             inputPersonalId={this.inputPersonalId}
                             handleLogout={this.handleLogout}
@@ -273,7 +273,6 @@ export default class App extends React.Component {
                             exact
                             path={"/serviceProvider"}
                             component={WrappedServiceProvider}
-                            clearanceLevel={this.state.clearanceLevel}
                             username={this.state.username}
                             loggedInStatus={this.state.loggedInStatus}
                             clearanceLevel={this.state.clearanceLevel}
