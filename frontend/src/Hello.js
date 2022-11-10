@@ -3,23 +3,37 @@ import { Redirect } from 'react-router-dom';
 
 export default class Hello extends React.Component {
   state = {
-    redirect: false
+    FHIRredirect: false,
+    PreviousCodeRedirect: false
   }
-  setRedirect = () => {
+  FHIRsetRedirect = () => {
     this.setState({
-      redirect: true
+      FHIRredirect: true
     })
   }
-  renderRedirect = () => {
-    if (this.state.redirect) {
+  PreviousCodesetRedirect = () => {
+    this.setState({
+      PreviousCodeRedirect: true
+    })
+  }
+  FHIRrenderRedirect = () => {
+    if (this.state.FHIRredirect) {
+      return <Redirect to='/FHIRLauncher' />
+    }
+  }
+  PreviousCoderenderRedirect = () => {
+    if (this.state.PreviousCodeRedirect) {
       return <Redirect to='/Login' />
     }
   }
+  
   render () {
     return (
        <div>
-        {this.renderRedirect()}
-        <button onClick={this.setRedirect}>Redirect</button>
+        {this.FHIRrenderRedirect()}
+        <button onClick={this.FHIRsetRedirect}>Our contributions</button>
+        {this.PreviousCoderenderRedirect()}
+        <button onClick={this.PreviousCodesetRedirect}>Previous code</button>
        </div>
     )
   }
