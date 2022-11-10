@@ -1,49 +1,26 @@
-import React from "react";
-import Header from "./Header"
-import Launcher from "./FHIR-Views/src/components/Launcher"
-import LocationMap from "./LocationMap"
-import StreetCardFooter from './StreetCardFooter'
-import {Button, Layout} from "antd";
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 
-export default class LandingPage extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            loggedInStatus: 'NOT_LOGGED_IN'
-        };
-        this.handleSuccessfulLoginAction = this.handleSuccessfulLoginAction.bind(this);
-
-        
-
+export default class Hello extends React.Component {
+  state = {
+    redirect: false
+  }
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/Login' />
     }
-
-
-    handleSuccessfulLoginAction() {
-        this.props.history.push('/login');
-    }
-
-    componentDidUpdate() {
-        this.props.handleLogout();
-    }
-
-    
-
-    render() {
-        return (
-            <Layout>
-                
-                    <Button onClick={Launcher}  type="primary" key="2">
-                       Go to new code
-                    </Button>
-                <Header
-                    handleSuccessfulLoginAction={this.handleSuccessfulLoginAction}
-                    loggedInStatus={this.state.loggedInStatus}
-                />
-                <LocationMap className="location-map"/>
-                <StreetCardFooter/>
-            </Layout>
-
-        );
-    }
-} 
+  }
+  render () {
+    return (
+       <div>
+        {this.renderRedirect()}
+        <button onClick={this.setRedirect}>Redirect</button>
+       </div>
+    )
+  }
+}
