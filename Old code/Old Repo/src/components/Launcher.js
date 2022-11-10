@@ -22,25 +22,19 @@ export default class Launcher extends React.Component {
      */
     onChangeProvider(event,context) {
         console.log(event.target.value);
-
         const providerKey = event.target.value
         const fhirconfig = config[event.target.value]
 
-        console.log("Providerkey: " + providerKey + " fhirconfig: " + fhirconfig.stringify);
-
         // put your client id in .env.local (ignored by .gitignore)
         const secret_client_id = "REACT_APP_CLIENT_ID_" + providerKey
-        console.log("SecretID: " + secret_client_id)
         if( secret_client_id in process.env ) {
             fhirconfig.client_id = process.env[secret_client_id]
-            console.log("fhirconfig.client_id: " + fhirconfig.client_id);
         }
 
         const options = {
             clientId: fhirconfig.client_id,
             scope: fhirconfig.scope,
             redirectUri: fhirconfig.redirectUri,
-            
 
             // WARNING: completeInTarget=true is needed to make this work
             // in the codesandbox frame. It is otherwise not needed if the
@@ -49,9 +43,6 @@ export default class Launcher extends React.Component {
             // setting this!
             //completeInTarget: true
         }
-
-        
-
         if( fhirconfig.client_id === 'OPEN' ) {
             options.fhirServiceUrl = fhirconfig.url
             options.patientId = fhirconfig.patientId
@@ -64,7 +55,6 @@ export default class Launcher extends React.Component {
         }
 
         alert(`options:  ${JSON.stringify(options)}`)
-        console.log("Options: " + options.clientId + " " + options.redirectUri + " " + options.scope);
         SMART.authorize(options);
     }
 
