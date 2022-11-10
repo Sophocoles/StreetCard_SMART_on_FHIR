@@ -1,7 +1,7 @@
 import React from "react";
-import { oauth2 as SMART } from "../../../../node_modules/fhirclient";
-import config from "../config"
-import { FhirClientContext } from "../FhirClientContext";
+import { oauth2 as SMART } from "fhirclient";
+import config from "./FHIRconfig"
+import { FhirClientContext } from "./FHIRFhirClientContext";
 
 /**
  * Typically the launch page is an empty page with a `SMART.authorize`

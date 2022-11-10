@@ -27,6 +27,7 @@ import AddProductSuccess from "./AddProductSuccess";
 import UpdateSocialWorkerInfoForm from "./UpdateSocialWorkerInfo";
 import SuccessfulSocialRegistration from "./SuccessfulSocialRegistration"
 import Hello from "./Hello"
+import FHIRLauncher from './FHIRLauncher';
 
 const PrivateRoute = ({component: Component, loggedInStatus: loggedInStatus, ...rest}) => (
     <Route render={(props) => (
@@ -433,6 +434,13 @@ export default class App extends React.Component {
                             exact
                             path={"/loginError"}
                             component={LoginError}
+                            loggedInStatus={this.state.loggedInStatus}
+                            handleLogout={this.handleLogout}
+                        />
+                        <Route
+                            exact
+                            path={"/FHIRLauncher"}
+                            component={FHIRLauncher}
                             loggedInStatus={this.state.loggedInStatus}
                             handleLogout={this.handleLogout}
                         />
